@@ -1,23 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
+import {pi, sayHello} from './a'
+import CounterText from './counterText'
 export default function App(){
   let [count,setCount] = useState(0)
   function increment(){ 
     setCount(count + 1)
   }
 
+  function decrement(){ 
+    setCount(count - 1)
+  }
+
+
   function renderEncouragingText(){
-    if (count == 10){
+    if (count >= 20){
+      return "Great job! Is your hand pain?"
+    }else if(count >= 10){
       return "Keep Going"
     }
   }
   return (
     <View style={styles.container}>
+        <CounterText color="red" font={10} margin={20}>{count}</CounterText>
+        <CounterText color="red" font={20} margin={20}>{count}</CounterText>
+        <CounterText color="red" font={30} margin={20}>{count}</CounterText>
+        <CounterText color="red" font={40} margin={20}>{count}</CounterText>
         <Text style={styles.text}>{count}</Text>
         <TouchableOpacity style={styles.button} onPress={increment}>
-          <Text style={styles.buttonText}>Click me</Text>
+          <Text style={styles.buttonText}>Increase</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={decrement}>
+          <Text style={styles.buttonText}>Decrease</Text>
         </TouchableOpacity>
           <Text style={styles.encouragingText}>{renderEncouragingText()}</Text>
         <StatusBar style="auto" />
@@ -46,6 +61,7 @@ const styles = StyleSheet.create({
   },
   button:{
     backgroundColor:'red',
+    marginBottom:10,
   },
   buttonText: {
     padding:10,
